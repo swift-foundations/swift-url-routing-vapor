@@ -34,7 +34,7 @@ dependencies: [
 .target(
     name: "YourTarget",
     dependencies: [
-        .product(name: "URLRoutingVapor", package: "swift-url-routing-vapor")
+        .product(name: "URL Routing Vapor", package: "swift-url-routing-vapor")
     ]
 )
 ```
@@ -42,7 +42,7 @@ dependencies: [
 ## Quick Start
 
 ```swift
-import URLRoutingVapor
+import URL_Routing_Vapor
 
 let app = try await Application.make(.detect())
 app.mount(SiteRouter()) { route in

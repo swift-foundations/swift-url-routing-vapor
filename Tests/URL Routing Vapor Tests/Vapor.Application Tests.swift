@@ -1,6 +1,6 @@
 //
 //  Vapor.Application Tests.swift
-//  swift-url-routing-vapor — URLRoutingVapor Tests
+//  swift-url-routing-vapor — URL Routing Vapor Tests
 //
 //  Coverage for the router-mounting half of the bridge.
 //
@@ -9,7 +9,7 @@ import Testing
 import Vapor
 import VaporTesting
 
-@testable import URLRoutingVapor
+@testable import URL_Routing_Vapor
 
 extension Vapor.Application {
     @Suite

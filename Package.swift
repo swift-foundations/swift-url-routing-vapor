@@ -11,7 +11,7 @@ let package = Package(
     products: [
         // The URLRouting × Vapor bridge: request-data conversion from Vapor
         // requests, and router mounting onto a Vapor application.
-        .library(name: "URLRoutingVapor", targets: ["URLRoutingVapor"])
+        .library(name: "URL Routing Vapor", targets: ["URL Routing Vapor"])
     ],
     dependencies: [
         // Spelled bare to match swift-url-routing's own spelling of the same
@@ -22,7 +22,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "URLRoutingVapor",
+            name: "URL Routing Vapor",
             dependencies: [
                 .product(name: "OrderedCollections", package: "swift-collections"),
                 .product(name: "URLRouting", package: "swift-url-routing"),
@@ -30,9 +30,9 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "URLRoutingVapor Tests",
+            name: "URL Routing Vapor Tests",
             dependencies: [
-                "URLRoutingVapor",
+                "URL Routing Vapor",
                 .product(name: "VaporTesting", package: "vapor"),
             ]
         ),

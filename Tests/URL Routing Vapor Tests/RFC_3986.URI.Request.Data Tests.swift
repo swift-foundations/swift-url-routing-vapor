@@ -1,6 +1,6 @@
 //
 //  RFC_3986.URI.Request.Data Tests.swift
-//  swift-url-routing-vapor — URLRoutingVapor Tests
+//  swift-url-routing-vapor — URL Routing Vapor Tests
 //
 //  Coverage for the Vapor.Request → request-data conversion half of the
 //  bridge.
@@ -9,7 +9,7 @@
 import Testing
 import Vapor
 
-@testable import URLRoutingVapor
+@testable import URL_Routing_Vapor
 
 extension RFC_3986.URI.Request.Data {
     @Suite

@@ -1,5 +1,5 @@
 // Vapor.Application+mount.swift
-// swift-url-routing-vapor — URLRoutingVapor
+// swift-url-routing-vapor — URL Routing Vapor
 //
 // Heritage: derived from pointfreeco/vapor-routing @ 0.1.3 (MIT License,
 // Copyright (c) 2022 Point-Free), via boiler's re-expression (Sendable

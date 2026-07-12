@@ -1,5 +1,5 @@
 // RFC_3986.URI.Request.Data+Vapor.Request.swift
-// swift-url-routing-vapor — URLRoutingVapor
+// swift-url-routing-vapor — URL Routing Vapor
 //
 // Heritage: derived from pointfreeco/vapor-routing @ 0.1.3
 // (Sources/VaporRouting/URLRequestData+Vapor.Request.swift, MIT License,
