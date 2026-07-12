@@ -23,6 +23,7 @@
 // Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 
 import Foundation
+import OrderedCollections
 public import URLRouting
 public import Vapor
 

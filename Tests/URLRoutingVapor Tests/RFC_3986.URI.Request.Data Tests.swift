@@ -38,7 +38,8 @@ extension RFC_3986.URI.Request.Data.Test.Unit {
         #expect(data != nil)
         #expect(data?.host == "example.com")
         #expect(data?.port == 8080)
-        #expect(data?.path == "/a/b")
+        let path = data.map { Array($0.path) }
+        #expect(path == ["a", "b"])
         #expect(data?.query["x"] == ["1", "2"])
         #expect(data?.query["y"] == ["z"])
         #expect(data?.fragment == "frag")

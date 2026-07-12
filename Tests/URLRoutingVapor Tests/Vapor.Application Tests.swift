@@ -27,7 +27,7 @@ extension Vapor.Application {
             typealias Failure = NoMatch
 
             func parse(_ input: inout Input) throws(NoMatch) {
-                guard input.path == "/hello" else { throw NoMatch() }
+                guard Array(input.path) == ["hello"] else { throw NoMatch() }
             }
         }
     }
