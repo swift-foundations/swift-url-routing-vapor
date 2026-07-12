@@ -1,0 +1,5 @@
+description: Vapor integration for swift-url-routing.
+topics:
+  - foundations
+  - vapor
+  - url-routing
