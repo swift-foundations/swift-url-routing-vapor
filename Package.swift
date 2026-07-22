@@ -18,6 +18,7 @@ let package = Package(
         // upstream — one canonical location per identity across the closure.
         .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.3"),
         .package(url: "https://github.com/swift-foundations/swift-url-routing.git", branch: "main"),
+        .package(url: "https://github.com/swift-standards/swift-http-standard.git", branch: "main"),
         .package(url: "https://github.com/vapor/vapor.git", from: "4.102.1"),
     ],
     targets: [
@@ -25,6 +26,7 @@ let package = Package(
             name: "URL Routing Vapor",
             dependencies: [
                 .product(name: "OrderedCollections", package: "swift-collections"),
+                .product(name: "HTTP Standard", package: "swift-http-standard"),
                 .product(name: "URLRouting", package: "swift-url-routing"),
                 .product(name: "Vapor", package: "vapor"),
             ]

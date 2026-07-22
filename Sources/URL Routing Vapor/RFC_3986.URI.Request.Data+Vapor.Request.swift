@@ -8,7 +8,7 @@
 // `RFC_3986.URI.Request.Data.init(method:scheme:userinfo:...)` surface
 // (vapor-routing dissolution, repotraffic sprint S2; the pointfree
 // user/password pair maps onto the RFC 3986 `userinfo` component, and the
-// method string onto `RFC_7231.Method`). Converged here from
+// method string onto `HTTP.Method`). Converged here from
 // swift-server-foundation-vapor as one half of the URLRouting × Vapor
 // bridge (integration-mints arc, 2026-07-12).
 //
@@ -23,6 +23,7 @@
 // Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 
 import Foundation
+import HTTP_Standard
 import OrderedCollections
 public import URLRouting
 public import Vapor
@@ -51,7 +52,7 @@ extension RFC_3986.URI.Request.Data {
         }
 
         self.init(
-            method: RFC_7231.Method(rawValue: request.method.string),
+            method: HTTP.Method(rawValue: request.method.rawValue),
             scheme: request.url.scheme,
             userinfo: {
                 if let basic = request.headers.basicAuthorization {
