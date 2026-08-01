@@ -19,17 +19,21 @@ extension Vapor.Application {
         @Suite struct Integration {}
 
         /// Matches exactly `GET /hello`; anything else fails to parse.
-        struct HelloRouter: Parser.`Protocol`, Sendable {
-            typealias Input = RFC_3986.URI.Request.Data
-            typealias Output = Void
+        struct Router: Parser.`Protocol`, Sendable {}
+    }
+}
 
-            struct NoMatch: Swift.Error {}
-            typealias Failure = NoMatch
+extension Vapor.Application.Test.Router {
+    // swift-linter:disable:next unification typealias
+    // REASON: Parser.Protocol associated-type witness (Input); every conformer must declare this exact typealias.
+    typealias Input = RFC_3986.URI.Request.Data
+    typealias Output = Void
 
-            func parse(_ input: inout Input) throws(NoMatch) {
-                guard Array(input.path) == ["hello"] else { throw NoMatch() }
-            }
-        }
+    struct Mismatch: Swift.Error {}
+    typealias Failure = Mismatch
+
+    func parse(_ input: inout Input) throws(Mismatch) {
+        guard Array(input.path) == ["hello"] else { throw Mismatch() }
     }
 }
 
@@ -38,7 +42,7 @@ extension Vapor.Application.Test.Unit {
     func `mounted router answers a parsed route`() async throws {
         let app = try await Application.make(.testing)
 
-        app.mount(Vapor.Application.Test.HelloRouter()) { _ in "hello!" }
+        app.mount(Vapor.Application.Test.Router()) { _ in "hello!" }
 
         try await app.testing().test(.GET, "hello") { response async in
             #expect(response.status == .ok)
@@ -54,7 +58,7 @@ extension Vapor.Application.Test.`Edge Case` {
     func `unmatched requests fall through to the next responder`() async throws {
         let app = try await Application.make(.testing)
 
-        app.mount(Vapor.Application.Test.HelloRouter()) { _ in "hello!" }
+        app.mount(Vapor.Application.Test.Router()) { _ in "hello!" }
 
         try await app.testing().test(.GET, "elsewhere") { response async in
             #expect(response.status == .notFound)
@@ -69,7 +73,7 @@ extension Vapor.Application.Test.Integration {
     func `responder-shaped mount receives the request and answers with a response`() async throws {
         let app = try await Application.make(.testing)
 
-        app.mount(Vapor.Application.Test.HelloRouter()) { request, _, _ in
+        app.mount(Vapor.Application.Test.Router()) { request, _, _ in
             Response(status: .ok, body: .init(string: "from \(request.url.path)"))
         }
 

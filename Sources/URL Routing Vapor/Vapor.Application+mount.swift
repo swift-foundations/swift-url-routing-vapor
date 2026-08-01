@@ -95,6 +95,8 @@ extension Mount: AsyncMiddleware {
                     "Route not found",
                     metadata: [
                         "path": .string(request.url.path),
+                        // swift-linter:disable:next raw value access
+                        // REASON: Vapor.HTTPMethod (external framework type) has no typed accessor for building this log-metadata string.
                         "method": .string(request.method.rawValue),
                         "error": .string(routingError.localizedDescription),
                     ]
