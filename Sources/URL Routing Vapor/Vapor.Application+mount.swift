@@ -37,6 +37,11 @@ extension Vapor.Application {
     public func mount<Router: Parser.`Protocol` & Sendable>(
         _ router: Router,
         use closure:
+            // REASON: this closure funnels exclusively into
+            // Mount.respond(to:chainingTo:) below, an AsyncMiddleware
+            // protocol witness Vapor mandates as untyped `throws`; typing
+            // this parameter would not survive that boundary.
+            // swiftlint:disable:next typed_throws_required
             @Sendable @escaping (Request, Vapor.AsyncResponder, Router.Output) async throws ->
             Vapor.Response
     ) where Router.Input == RFC_3986.URI.Request.Data {
@@ -50,6 +55,11 @@ extension Vapor.Application {
     ///   - closure: Maps a parsed route to any `AsyncResponseEncodable`.
     public func mount<Router: Parser.`Protocol` & Sendable>(
         _ router: Router,
+        // REASON: `any AsyncResponseEncodable` is Vapor's own existential
+        // for heterogeneous route-output response types, and this
+        // closure's `throws` funnels into the same untyped AsyncMiddleware
+        // witness as the overload above.
+        // swiftlint:disable:next no_any_protocol_existential typed_throws_required
         use closure: @escaping @Sendable (Router.Output) async throws -> any AsyncResponseEncodable
     ) where Router.Input == RFC_3986.URI.Request.Data, Router.Output: Sendable {
         self.mount(router) { request, _, output in
@@ -64,6 +74,10 @@ extension Vapor.Application {
 private struct Mount<Router: Parser.`Protocol` & Sendable>
 where Router.Input == RFC_3986.URI.Request.Data {
     let router: Router
+    // REASON: stored form of the closure parameter above — see the
+    // mount(_:use:) REASON; it funnels into the untyped AsyncMiddleware
+    // witness below.
+    // swiftlint:disable:next typed_throws_required
     let respond: @Sendable (Request, AsyncResponder, Router.Output) async throws -> Vapor.Response
 }
 
@@ -71,6 +85,11 @@ extension Mount: AsyncMiddleware {
     func respond(
         to request: Request,
         chainingTo next: AsyncResponder
+            // REASON: AsyncMiddleware.respond(to:chainingTo:) is Vapor's
+            // exact protocol requirement signature, spelled with untyped
+            // `throws`; no typed `E` can be named here without breaking
+            // the conformance.
+            // swiftlint:disable:next typed_throws_required
     ) async throws -> Response {
 
         if request.body.data == nil {

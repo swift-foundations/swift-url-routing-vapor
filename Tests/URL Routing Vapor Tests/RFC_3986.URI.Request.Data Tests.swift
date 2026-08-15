@@ -43,7 +43,7 @@ extension RFC_3986.URI.Request.Data.Test.Unit {
         #expect(data?.query["x"] == ["1", "2"])
         #expect(data?.query["y"] == ["z"])
         #expect(data?.fragment == "frag")
-        #expect(data?.headers["Accept"]?.first ?? nil == "text/html")
+        #expect(data?.headers["Accept"]?.first== "text/html")
 
         try await app.asyncShutdown()
     }
