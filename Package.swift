@@ -5,8 +5,8 @@ import PackageDescription
 let package = Package(
     name: "swift-url-routing-vapor",
     platforms: [
-        .macOS(.v26),
-        .iOS(.v26),
+        .macOS("27"),
+        .iOS("27"),
     ],
     products: [
         // The URLRouting × Vapor bridge: request-data conversion from Vapor
